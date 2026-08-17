@@ -1,0 +1,156 @@
+{% extends "includes/base.html" %} {% block content %}
+
+<div class="container-fluid">
+  <!-- Page Header -->
+  <div class="mb-4">
+    <h4 class="mb-1">Manual Scraper</h4>
+    <p class="text-muted mb-0">Select a source and start scraping.</p>
+  </div>
+
+  <!-- Scraper Form -->
+  <div class="card border-0 shadow-sm">
+    <div class="card-body">
+       <form
+    method="post"
+    action="/manual-scraper/run"
+    class="row g-3 align-items-end"
+>
+
+    <!-- Keywords -->
+     <div class="col-md-5">
+    <label
+        for="keywords"
+        class="form-label fw-semibold"
+    >
+        Keywords
+    </label>
+
+    <input
+        type="text"
+        id="keywords"
+        name="keywords"
+        class="form-control"
+        placeholder="e.g. AI, healthcare, education"
+        required
+    >
+
+    <small class="text-muted">
+        Multiple keywords can be separated by commas.
+    </small>
+</div>
+
+ 
+
+
+    <!-- Source -->
+    <div class="col-md-4">
+
+        <label
+            for="source"
+            class="form-label fw-semibold"
+        >
+            Source
+        </label>
+
+        <select
+            id="source"
+            name="source"
+            class="form-select"
+            required
+        >
+            <option value="" disabled selected>
+                Select source
+            </option>
+
+            <option value="ungm">
+                UNGM
+            </option>
+
+            <option value="devnet">
+                DevNet
+            </option>
+        </select>
+
+    </div>
+
+
+    <!-- Button -->
+    <div class="col-md-auto">
+
+        <button
+            type="submit"
+            class="btn btn-primary px-4"
+        >
+            <i class="bi bi-play-fill me-1"></i>
+            Start Scraping
+        </button>
+
+    </div>
+
+</form>
+    </div>
+  </div>
+
+  <!-- Scraping Result -->
+  {% if result %}
+
+  <div class="card border-0 shadow-sm mt-4">
+    <div class="card-body">
+      <h6 class="mb-3">Scraping Result</h6>
+
+      <div class="row g-3">
+        <div class="col-md-3">
+          <div class="border rounded p-3">
+            <small class="text-muted"> Source </small>
+
+            <div class="fw-semibold">{{ result.source }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="border rounded p-3">
+            <small class="text-muted"> Scraped </small>
+
+            <div class="fw-semibold">{{ result.scraped }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="border rounded p-3">
+            <small class="text-muted"> Inserted </small>
+
+            <div class="fw-semibold text-success">{{ result.inserted }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="border rounded p-3">
+            <small class="text-muted"> Skipped </small>
+
+            <div class="fw-semibold text-warning">{{ result.skipped }}</div>
+          </div>
+        </div>
+      </div>
+
+      {% if result.failed > 0 %}
+
+      <div class="alert alert-danger mt-3 mb-0">
+        {{ result.failed }} record(s) failed to process.
+      </div>
+
+      {% endif %}
+
+      {% if result.message %}
+
+      <div class="alert alert-warning mt-3 mb-0">
+        {{ result.message }}
+      </div>
+
+      {% endif %}
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+
+{% endblock %}

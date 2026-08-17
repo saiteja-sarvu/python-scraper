@@ -1,0 +1,54 @@
+<aside class="app-sidebar d-flex flex-column">
+
+    <nav class="nav flex-column p-3">
+
+    <!-- Main Menu -->
+    <div class="sidebar-heading text-uppercase text-secondary small fw-semibold mb-2">
+        Main
+    </div>
+
+    <a href="/"
+       class="nav-link sidebar-link d-flex align-items-center {% if request.url.path == '/' %}active{% endif %}">
+        <i class="bi bi-speedometer2 me-2"></i>
+        <span class="link-label">Dashboard</span>
+    </a>
+
+    <!-- Contact Management -->
+    <div class="sidebar-heading text-uppercase text-secondary small fw-semibold mt-4 mb-2">
+        User Management
+    </div>
+
+    <a href="/users"
+       class="nav-link sidebar-link d-flex align-items-center {% if request.url.path.startswith('/users') %}active{% endif %}">
+        <i class="bi bi-person-lines-fill me-2"></i>
+        <span class="link-label">Users</span>
+    </a>
+    <!-- Tenders -->
+    <div class="sidebar-heading text-uppercase text-secondary small fw-semibold mt-4 mb-2">
+        Tenders
+    </div>
+
+    <a href="/tenders"
+       class="nav-link sidebar-link d-flex align-items-center {% if request.url.path.startswith('/tenders') %}active{% endif %}">
+        <i class="bi bi-receipt me-2"></i>
+        <span class="link-label">Tender</span>
+    </a>
+
+    <a href="/manual-scraper"
+       class="nav-link sidebar-link d-flex align-items-center {% if request.url.path.startswith('/manual-scraper') %}active{% endif %}">
+        <i class="bi bi-receipt me-2"></i>
+        <span class="link-label">Manual Scraper</span>
+    </a>
+
+</nav>
+
+    <div class="mt-auto p-3 border-top">
+
+        <a href="/logout" class="nav-link sidebar-link d-flex align-items-center text-danger">
+            <i class="bi bi-box-arrow-right me-2"></i>
+            <span class="link-label">Logout</span>
+        </a>
+
+    </div>
+
+</aside>

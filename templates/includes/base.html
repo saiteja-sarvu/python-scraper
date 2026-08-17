@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}User Manager{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --um-accent: #6f61ef;
+            --um-accent-soft: #eeecfd;
+            --um-text: #495057;
+            --um-text-muted: #8a97a8;
+            --um-border: #e9ecef;
+            --header-h: 64px;
+            --sidebar-w: 250px;
+            --sidebar-w-collapsed: 78px;
+        }
+
+        html, body {
+            overflow-x: hidden;
+        }
+
+        body {
+            background: #f5f6f8;
+            color: var(--um-text);
+        }
+
+        .app-header {
+            height: var(--header-h);
+            background: #fff;
+            border-bottom: 1px solid var(--um-border);
+            z-index: 1030;
+        }
+
+        .app-body {
+            padding-top: var(--header-h);
+        }
+
+        .app-sidebar {
+            position: fixed;
+            top: var(--header-h);
+            bottom: 0;
+            left: 0;
+            width: var(--sidebar-w);
+            background: #fff;
+            border-right: 1px solid var(--um-border);
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: width 0.2s ease;
+        }
+
+        .app-main {
+            margin-left: var(--sidebar-w);
+            padding: 2rem;
+            min-height: calc(100vh - var(--header-h));
+            transition: margin-left 0.2s ease;
+        }
+
+        .app-footer {
+            margin-left: var(--sidebar-w);
+            transition: margin-left 0.2s ease;
+        }
+
+        .sidebar-brand {
+            height: var(--header-h);
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            color: var(--um-text);
+            background: transparent;
+        }
+
+        .icon-btn:hover {
+            background: #f5f6f8;
+        }
+
+        .search-pill {
+            background: #f5f6f8;
+            border-radius: 999px;
+            max-width: 420px;
+        }
+
+        .search-pill input {
+            background: transparent;
+        }
+
+        .search-pill input:focus {
+            box-shadow: none;
+        }
+
+        .sidebar-link {
+            color: var(--um-text-muted);
+            border-radius: 10px;
+            padding: 0.65rem 1rem;
+            margin-bottom: 4px;
+            font-size: 0.925rem;
+        }
+
+        .sidebar-link:hover {
+            background: var(--um-accent-soft);
+            color: var(--um-accent);
+        }
+
+        .sidebar-link.active {
+            background: var(--um-accent);
+            color: #fff;
+            font-weight: 500;
+        }
+
+        body.sidebar-collapsed .app-sidebar {
+            width: var(--sidebar-w-collapsed);
+        }
+
+        body.sidebar-collapsed .app-main,
+        body.sidebar-collapsed .app-footer {
+            margin-left: var(--sidebar-w-collapsed);
+        }
+
+        body.sidebar-collapsed .sidebar-link {
+            justify-content: center;
+            padding: 0.65rem;
+        }
+
+        body.sidebar-collapsed .sidebar-link .link-label {
+            display: none;
+        }
+
+        body.sidebar-collapsed .sidebar-link i {
+            margin-right: 0 !important;
+        }
+
+        body.sidebar-collapsed .sidebar-heading {
+            display: none;
+        }
+
+        body.sidebar-collapsed .app-sidebar nav {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .sidebar-backdrop {
+            display: none;
+            position: fixed;
+            inset: var(--header-h) 0 0 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 1025;
+        }
+
+        @media (max-width: 767.98px) {
+            .app-sidebar {
+                width: var(--sidebar-w);
+                transform: translateX(-100%);
+                transition: transform 0.2s ease;
+                z-index: 1035;
+            }
+
+            .app-main,
+            .app-footer {
+                margin-left: 0;
+            }
+
+            body.sidebar-mobile-open .app-sidebar {
+                transform: translateX(0);
+            }
+
+            body.sidebar-mobile-open .sidebar-backdrop {
+                display: block;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    {% if show_header | default(true) %}
+        {% include "includes/header.html" %}
+    {% endif %}
+
+    <div class="app-body">
+
+        {% include "includes/sidebar.html" %}
+
+        <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+        <main class="app-main">
+
+            {% block content %}
+            {% endblock %}
+
+        </main>
+
+    </div>
+
+    {% if show_footer | default(true) %}
+        {% include "includes/footer.html" %}
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS -->
+
+    
+    <script>
+        function isMobileSidebar() {
+            return window.matchMedia("(max-width: 767.98px)").matches;
+        }
+
+        document.getElementById("sidebarToggle")?.addEventListener("click", function () {
+            if (isMobileSidebar()) {
+                document.body.classList.toggle("sidebar-mobile-open");
+            } else {
+                document.body.classList.toggle("sidebar-collapsed");
+            }
+        });
+
+        document.getElementById("sidebarBackdrop")?.addEventListener("click", function () {
+            document.body.classList.remove("sidebar-mobile-open");
+        });
+
+        document.querySelectorAll(".app-sidebar .sidebar-link").forEach(function (link) {
+            link.addEventListener("click", function () {
+                if (isMobileSidebar()) {
+                    document.body.classList.remove("sidebar-mobile-open");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+{% extends "includes/base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h3>Tender Details</h3>
+
+            <p class="text-muted mb-0">
+                {{ tender.reference_number or "No Reference Number" }}
+            </p>
+        </div>
+
+        <a href="/tenders/" class="btn btn-secondary">
+            Back
+        </a>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <strong>Title</strong>
+                    <div>
+                        {{ tender.title }}
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 mb-3">
+                    <strong>Source</strong>
+                    <div>
+                        {{ tender.source }}
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 mb-3">
+                    <strong>Status</strong>
+                    <div>
+                        {{ tender.status }}
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+                    <strong>Organization</strong>
+                    <div>
+                        {{ tender.organization or "-" }}
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 mb-3">
+                    <strong>Country</strong>
+                    <div>
+                        {{ tender.country or "-" }}
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 mb-3">
+                    <strong>Category</strong>
+                    <div>
+                        {{ tender.category or "-" }}
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 mb-3">
+                    <strong>Published Date</strong>
+                    <div>
+                        {% if tender.published_date %}
+                            {{ tender.published_date.strftime("%d-%m-%Y") }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 mb-3">
+                    <strong>Deadline</strong>
+                    <div>
+                        {% if tender.deadline %}
+                            {{ tender.deadline.strftime("%d-%m-%Y %H:%M") }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 mb-3">
+                    <strong>Keyword</strong>
+                    <div>
+                        {{ tender.keyword or "-" }}
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 mb-3">
+                    <strong>Description</strong>
+
+                    <div class="mt-2">
+                        {{ tender.description or "-" }}
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+
+                    {% if tender.source_url %}
+
+                    <a
+                        href="{{ tender.source_url }}"
+                        target="_blank"
+                        class="btn btn-primary"
+                    >
+                        Open Original Tender
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

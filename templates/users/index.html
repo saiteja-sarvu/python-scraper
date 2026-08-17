@@ -1,0 +1,100 @@
+{% extends "includes/base.html" %} {% block title %}Users{% endblock %} {% block content
+%}
+
+
+<div class="container-fluid">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">Users</h2>
+      <p class="text-muted mb-0">Manage system users and their roles.</p>
+    </div>
+
+    <a href="/users/add" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-2"></i>
+      Add User
+    </a>
+  </div>
+
+  <!-- Card -->
+  <div class="card border-0 shadow-sm">
+    <div class="card-body">
+      <table id="usersTable" class="table table-bordered table-striped w-100">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Team</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+  $(document).ready(function () {
+    console.log("Initializing DataTable...");
+
+    $("#usersTable").DataTable({
+      processing: true,
+      pageLength: 25,
+      ajax: {
+        url: "/users/list",
+        type: "GET",
+        dataSrc: "",
+        error: function (xhr, error, thrown) {
+          console.log("DataTable Error:", error);
+          console.log("Response:", xhr.responseText);
+        },
+      },
+
+      columns: [
+        { data: "id" },
+        {
+          data: "name",
+          defaultContent: "-",
+        },
+        { data: "username" },
+        { data: "email" },
+        { data: "role" },
+        { data: "team_name" },
+        { data: "is_active" },
+        {
+          data: "created_at",
+          render: function (data) {
+            if (!data) return "-";
+            return new Date(data).toLocaleDateString("en-GB");
+          },
+        },
+        {
+          data: null,
+          render: function (data, type, row) {
+            return `
+                 <a href="/users/edit/${row.id}"
+                  class="btn btn-sm btn-primary"
+                  title="Edit User">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+
+                <a class="btn btn-sm btn-danger delete-btn" data-id="${row.id}">
+                    <i class="bi bi-trash"></i>
+                </a>
+            `;
+          },
+        },
+      ],
+    });
+  });
+</script>
+{% endblock %}

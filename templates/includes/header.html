@@ -1,0 +1,64 @@
+<header class="app-header navbar fixed-top px-3 px-md-4 gap-3">
+
+    <a href="/" class="sidebar-brand d-flex align-items-center gap-2 text-decoration-none">
+        <span class="d-flex align-items-center justify-content-center rounded-circle"
+              style="width:32px;height:32px;background:var(--um-accent);">
+            <i class="bi bi-infinity text-white"></i>
+        </span>
+        <span class="d-none d-sm-inline fw-bold text-dark text-uppercase" style="letter-spacing:0.03em;">
+            Learning
+        </span>
+    </a>
+
+    <button id="sidebarToggle" type="button" class="btn icon-btn d-flex align-items-center justify-content-center">
+        <i class="bi bi-list fs-5"></i>
+    </button>
+
+    <div class="ms-auto d-flex align-items-center gap-2">
+
+        <button type="button" class="btn icon-btn position-relative d-flex align-items-center justify-content-center">
+            <i class="bi bi-bell fs-5"></i>
+            <span class="position-absolute top-0 end-0 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+        </button>
+
+        {% if user %}
+        <div class="dropdown" style="margin-bottom: 11px;">
+
+            <button class="btn btn-light border-0 dropdown-toggle d-flex align-items-center gap-2"
+                    data-bs-toggle="dropdown">
+
+                 
+
+                <span class="d-none d-sm-inline text-dark small fw-medium">
+                    {{ user.name }}
+                </span>
+
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+
+                <li>
+                    <span class="dropdown-item-text small text-muted">
+                        Signed in as <strong>{{ user.name }}</strong>
+                    </span>
+                </li>
+
+                <li><hr class="dropdown-divider"></li>
+
+                <li>
+                    <a class="dropdown-item text-danger" href="/logout">
+                        <i class="bi bi-box-arrow-right me-2"></i>
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+        {% endif %}
+
+        
+
+    </div>
+
+</header>
