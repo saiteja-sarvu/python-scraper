@@ -37,8 +37,8 @@ def scrape_ungm():
                 timeout=60000
             )
 
-            page.wait_for_load_state(
-                "networkidle",
+            page.wait_for_selector(
+                "[data-noticeid]",
                 timeout=60000
             )
 
@@ -238,10 +238,17 @@ def scrape_ungm_url(source_url):
                 timeout=60000
             )
 
-            page.wait_for_load_state(
-                "networkidle",
-                timeout=60000
-            )
+            try:
+                page.wait_for_load_state(
+                    "networkidle",
+                    timeout=60000
+                )
+            except Exception as error:
+                logger.warning(
+                    "UNGM detail page never reached networkidle for %s: %s",
+                    source_url,
+                    error
+                )
 
             return _extract_tender_from_page(
                 page,

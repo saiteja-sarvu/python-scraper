@@ -101,3 +101,67 @@ Call log:
 2026-08-17 11:41:00,972 - INFO - DEVNET: {'scraped': 2, 'inserted': 1, 'skipped': 1, 'failed': 0}
 2026-08-17 11:41:00,972 - INFO - Duration: 0:08:06.967068
 2026-08-17 11:41:00,972 - INFO - ========================================
+2026-08-26 16:41:02,747 - INFO - 
+2026-08-26 16:41:02,747 - INFO - ========================================
+2026-08-26 16:41:02,747 - INFO - SCHEDULED SCRAPER STARTED
+2026-08-26 16:41:02,747 - INFO - Time: 2026-08-26 16:41:02.747105
+2026-08-26 16:41:02,747 - INFO - ========================================
+2026-08-26 16:41:02,747 - INFO - ========================================
+2026-08-26 16:41:02,747 - INFO - Starting UNGM scraper
+2026-08-26 16:41:02,747 - INFO - ========================================
+2026-08-26 16:42:36,656 - ERROR - UNGM scraper failed
+Traceback (most recent call last):
+  File "E:\python\eventapp\backend\fastapi-taiq\scheduled_scraper.py", line 45, in run_scraper
+    tenders = scraper_function()
+  File "E:\python\eventapp\backend\fastapi-taiq\helpers\ungm_scraper.py", line 40, in scrape_ungm
+    page.wait_for_load_state(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        "networkidle",
+        ^^^^^^^^^^^^^^
+        timeout=60000
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\python\eventapp\backend\fastapi-taiq\venv\Lib\site-packages\playwright\sync_api\_generated.py", line 9980, in wait_for_load_state
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.wait_for_load_state(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            state=state, timeout=to_milliseconds(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+    )
+    ^
+  File "E:\python\eventapp\backend\fastapi-taiq\venv\Lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "E:\python\eventapp\backend\fastapi-taiq\venv\Lib\site-packages\playwright\_impl\_page.py", line 580, in wait_for_load_state
+    return await self._main_frame.wait_for_load_state(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\python\eventapp\backend\fastapi-taiq\venv\Lib\site-packages\playwright\_impl\_frame.py", line 298, in wait_for_load_state
+    return await self._wait_for_load_state_impl(state, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\python\eventapp\backend\fastapi-taiq\venv\Lib\site-packages\playwright\_impl\_frame.py", line 326, in _wait_for_load_state_impl
+    await waiter.result()
+playwright._impl._errors.TimeoutError: Timeout 60000ms exceeded.
+=========================== logs ===========================
+"load" event fired
+============================================================
+2026-08-26 16:42:36,727 - INFO - ========================================
+2026-08-26 16:42:36,727 - INFO - Starting DEVNET scraper
+2026-08-26 16:42:36,727 - INFO - ========================================
+2026-08-26 16:42:46,437 - INFO - DevNet links found: 13
+2026-08-26 16:42:51,700 - INFO - Scraped DevNet: 302836
+2026-08-26 16:42:55,142 - INFO - Scraped DevNet: 302833
+2026-08-26 16:42:55,740 - INFO - Total DevNet tenders: 2
+2026-08-26 16:42:55,740 - INFO - DEVNET tenders scraped: 2
+2026-08-26 16:42:56,000 - INFO - Tender inserted: DEVNET - 302836
+2026-08-26 16:42:56,093 - INFO - Tender inserted: DEVNET - 302833
+2026-08-26 16:42:56,093 - INFO - DEVNET completed | scraped=2 inserted=2 skipped=0 failed=0
+2026-08-26 16:42:56,093 - INFO - ========================================
+2026-08-26 16:42:56,093 - INFO - SCHEDULED SCRAPER COMPLETED
+2026-08-26 16:42:56,094 - INFO - UNGM: {'scraped': 0, 'inserted': 0, 'skipped': 0, 'failed': 1}
+2026-08-26 16:42:56,094 - INFO - DEVNET: {'scraped': 2, 'inserted': 2, 'skipped': 0, 'failed': 0}
+2026-08-26 16:42:56,094 - INFO - Duration: 0:01:53.347023
+2026-08-26 16:42:56,094 - INFO - ========================================

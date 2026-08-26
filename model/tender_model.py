@@ -8,7 +8,7 @@ def get_all_tenders():
                 SELECT
                     *
                 FROM ai_tenders
-                ORDER BY id DESC
+                ORDER BY created_at DESC
             """)
             return cursor.fetchall()
     finally:

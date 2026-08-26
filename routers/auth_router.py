@@ -5,7 +5,7 @@ import hashlib
 import secrets
 from datetime import datetime, timedelta
 from utils.email import send_password_reset_email
-from fastapi import APIRouter, Request, Form
+from fastapi import APIRouter, Request, Form, BackgroundTasks
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from model.user_model import (
@@ -140,19 +140,7 @@ def forgot_password_page(
         success=success
     )
 
-@router.post("/forgot-password")
-def forgot_password(
-    request: Request,
-    email: str = Form(...)
-):
-    user = get_user_by_email(email)
-    # Don't reveal whether email exists
-    if not user:
-        return RedirectResponse(
-            "/forgot-password?success=1",
-            status_code=303
-        )
-
+def _issue_password_reset(user):
     token = secrets.token_urlsafe(32)
     token_hash = hashlib.sha256(
         token.encode()
@@ -173,7 +161,6 @@ def forgot_password(
         f"{base_url}/reset-password"
         f"?token={token}"
     )
-    # Send email
     email_sent = send_password_reset_email(
         recipient_email=user["email"],
         recipient_name=user["name"],
@@ -184,6 +171,18 @@ def forgot_password(
             "Password reset email could not be sent to %s",
             user["email"]
         )
+
+
+@router.post("/forgot-password")
+def forgot_password(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    email: str = Form(...)
+):
+    user = get_user_by_email(email)
+    if user:
+        background_tasks.add_task(_issue_password_reset, user)
+
     return RedirectResponse(
         "/forgot-password?success=1",
         status_code=303

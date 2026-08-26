@@ -48,6 +48,7 @@
     $("#tendersTable").DataTable({
       processing: true,
       pageLength: 25,
+      order: [[6, "desc"]],
       ajax: {
         url: "/tenders/list",
         type: "GET",

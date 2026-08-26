@@ -20,10 +20,12 @@ def send_password_reset_email(
     )
 
     if not api_key:
-        raise ValueError("SENDGRID_API_KEY is not configured")
+        logger.error("SENDGRID_API_KEY is not configured")
+        return False
 
     if not from_email:
-        raise ValueError("SENDGRID_FROM_EMAIL is not configured")
+        logger.error("SENDGRID_FROM_EMAIL is not configured")
+        return False
 
     subject = "Reset Your Password"
 
