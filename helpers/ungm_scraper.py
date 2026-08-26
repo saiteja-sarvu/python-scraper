@@ -86,27 +86,37 @@ def _extract_tender(row):
         "data-noticeid"
     )
 
+
+    title_link = row.locator(
+        '.resultTitle a[href*="/Public/Notice/"]'
+    )
+
+    if title_link.count() == 0:
+        logger.warning(
+            "UNGM row has no tender link. Skipping row."
+        )
+        return None
+
     # ---------------------------------
     # Title
     # ---------------------------------
 
-    title = (
-        row.locator(
-            ".resultTitle .ungm-title"
-        )
-        .inner_text()
-        .strip()
-    )
+    try:
+        title = title_link.inner_text(
+            timeout=5000
+        ).strip()
+    except Exception as error:
 
-    # ---------------------------------
-    # Tender URL
-    # ---------------------------------
-
-    relative_url = (
-        row.locator(
-            '.resultTitle a[href*="/Public/Notice/"]'
+        logger.warning(
+            "Unable to read UNGM title. Skipping row: %s",
+            error
         )
-        .get_attribute("href")
+
+        return None
+
+    relative_url = title_link.get_attribute(
+        "href",
+        timeout=5000
     )
 
     source_url = (

@@ -14,7 +14,9 @@ from routers import dashboard_router
 from routers import user_router
 from routers import tender_router
 from routers import manual_scraper_router
+from dotenv  import load_dotenv
 
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("app")

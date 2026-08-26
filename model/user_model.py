@@ -248,3 +248,83 @@ def get_user_by_id(user_id):
             return user
     finally:
         db.close()
+        
+def get_user_by_email(email):
+    db = get_db()
+    try:
+        with db.cursor() as cursor:
+            cursor.execute("""
+                SELECT *
+                FROM ai_users
+                WHERE email = %s
+                LIMIT 1
+            """, (email,))
+            return cursor.fetchone()
+    finally:
+        db.close()
+        
+
+def create_password_reset_token(user_id, token_hash, expires_at, created_at):
+    db = get_db()
+
+    try:
+        with db.cursor() as cursor:
+            cursor.execute("""
+                INSERT INTO ai_password_reset_tokens
+                (
+                    user_id,
+                    token_hash,
+                    expires_at,
+                    created_at
+                )
+                VALUES (%s, %s, %s, %s)
+            """, (
+                user_id,
+                token_hash,
+                expires_at,
+                created_at
+            ))
+
+            db.commit()
+
+            return cursor.lastrowid
+
+    finally:
+        db.close()
+
+
+def get_password_reset_token(token_hash):
+    db = get_db()
+
+    try:
+        with db.cursor() as cursor:
+            cursor.execute("""
+                SELECT *
+                FROM ai_password_reset_tokens
+                WHERE token_hash = %s
+                  AND used_at IS NULL
+                  AND expires_at > NOW()
+                LIMIT 1
+            """, (token_hash,))
+
+            return cursor.fetchone()
+
+    finally:
+        db.close()
+
+
+def mark_password_reset_token_used(token_id):
+    db = get_db()
+
+    try:
+        with db.cursor() as cursor:
+            cursor.execute("""
+                UPDATE ai_password_reset_tokens
+                SET used_at = NOW()
+                WHERE id = %s
+            """, (token_id,))
+
+            db.commit()
+
+    finally:
+        db.close()

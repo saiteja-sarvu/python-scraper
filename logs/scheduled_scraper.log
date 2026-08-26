@@ -6,3 +6,98 @@
 2026-08-17 11:32:54,005 - INFO - ========================================
 2026-08-17 11:32:54,005 - INFO - Starting UNGM scraper
 2026-08-17 11:32:54,005 - INFO - ========================================
+2026-08-17 11:33:19,269 - INFO - UNGM tenders found: 30
+2026-08-17 11:33:49,381 - ERROR - Failed to process UNGM row 2: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(1).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:34:19,440 - ERROR - Failed to process UNGM row 4: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(3).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:34:49,475 - ERROR - Failed to process UNGM row 6: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(5).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:35:19,511 - ERROR - Failed to process UNGM row 8: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(7).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:35:49,545 - ERROR - Failed to process UNGM row 10: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(9).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:36:19,590 - ERROR - Failed to process UNGM row 12: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(11).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:36:49,623 - ERROR - Failed to process UNGM row 14: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(13).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:37:19,657 - ERROR - Failed to process UNGM row 16: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(15).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:37:49,690 - ERROR - Failed to process UNGM row 18: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(17).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:38:19,726 - ERROR - Failed to process UNGM row 20: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(19).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:38:49,772 - ERROR - Failed to process UNGM row 22: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(21).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:39:19,824 - ERROR - Failed to process UNGM row 24: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(23).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:39:49,860 - ERROR - Failed to process UNGM row 26: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(25).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:40:19,899 - ERROR - Failed to process UNGM row 28: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(27).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:40:49,934 - ERROR - Failed to process UNGM row 30: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-noticeid]").nth(29).locator(".resultTitle .ungm-title")
+
+2026-08-17 11:40:50,283 - INFO - UNGM tenders scraped: 15
+2026-08-17 11:40:50,363 - INFO - Tender inserted: UNGM - 309001
+2026-08-17 11:40:50,427 - INFO - Tender inserted: UNGM - 309159
+2026-08-17 11:40:50,489 - INFO - Tender inserted: UNGM - 309189
+2026-08-17 11:40:50,552 - INFO - Tender inserted: UNGM - 309467
+2026-08-17 11:40:50,680 - INFO - Tender inserted: UNGM - 310044
+2026-08-17 11:40:50,763 - INFO - Tender inserted: UNGM - 308421
+2026-08-17 11:40:50,861 - INFO - Tender inserted: UNGM - 308756
+2026-08-17 11:40:50,929 - INFO - Tender inserted: UNGM - 309954
+2026-08-17 11:40:50,964 - INFO - Tender inserted: UNGM - 308343
+2026-08-17 11:40:51,014 - INFO - Tender inserted: UNGM - 309048
+2026-08-17 11:40:51,094 - INFO - Tender inserted: UNGM - 309210
+2026-08-17 11:40:51,222 - INFO - Tender inserted: UNGM - 309421
+2026-08-17 11:40:51,261 - INFO - Tender inserted: UNGM - 309497
+2026-08-17 11:40:51,331 - INFO - Tender inserted: UNGM - 310083
+2026-08-17 11:40:51,405 - INFO - Tender inserted: UNGM - 310326
+2026-08-17 11:40:51,405 - INFO - UNGM completed | scraped=15 inserted=15 skipped=0 failed=0
+2026-08-17 11:40:51,405 - INFO - ========================================
+2026-08-17 11:40:51,405 - INFO - Starting DEVNET scraper
+2026-08-17 11:40:51,406 - INFO - ========================================
+2026-08-17 11:40:54,846 - INFO - DevNet links found: 11
+2026-08-17 11:40:57,990 - INFO - Scraped DevNet: 302412
+2026-08-17 11:41:00,822 - INFO - Scraped DevNet: 301079
+2026-08-17 11:41:00,910 - INFO - Total DevNet tenders: 2
+2026-08-17 11:41:00,910 - INFO - DEVNET tenders scraped: 2
+2026-08-17 11:41:00,970 - INFO - Tender inserted: DEVNET - 302412
+2026-08-17 11:41:00,972 - INFO - Duplicate skipped: DEVNET - 301079
+2026-08-17 11:41:00,972 - INFO - DEVNET completed | scraped=2 inserted=1 skipped=1 failed=0
+2026-08-17 11:41:00,972 - INFO - ========================================
+2026-08-17 11:41:00,972 - INFO - SCHEDULED SCRAPER COMPLETED
+2026-08-17 11:41:00,972 - INFO - UNGM: {'scraped': 15, 'inserted': 15, 'skipped': 0, 'failed': 0}
+2026-08-17 11:41:00,972 - INFO - DEVNET: {'scraped': 2, 'inserted': 1, 'skipped': 1, 'failed': 0}
+2026-08-17 11:41:00,972 - INFO - Duration: 0:08:06.967068
+2026-08-17 11:41:00,972 - INFO - ========================================
